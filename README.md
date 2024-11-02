@@ -10,7 +10,7 @@ This project uses two Python scripts to create two different components for the 
 
 ## Project Flow
 
-![Project Flow](./project.png)  
+![Project Flow](./project_flow.png)  
 
 ---
 
