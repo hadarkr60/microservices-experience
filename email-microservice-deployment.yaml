@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email-microservice
+  template:
+    metadata:
+      labels:
+        app: email-microservice
+    spec:
+      containers:
+      - name: email-microservice
+        image: hadarkravetsky/email_microservice:1
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-microservice
+spec:
+  selector:
+    app: email-microservice
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP  # Exposes the service only within the cluster

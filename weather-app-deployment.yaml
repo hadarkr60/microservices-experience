@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-app
+  template:
+    metadata:
+      labels:
+        app: weather-app
+    spec:
+      containers:
+      - name: weather-app
+        image: hadarkravetsky/main_microservice:1
+        ports:
+        - containerPort: 5000
+        env:
+        - name: EMAIL_SERVICE_HOST
+          value: "http://email-microservice.default.svc.cluster.local:5001/sendEmail"  # Internal DNS name of the email microservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-app
+spec:
+  selector:
+    app: weather-app
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30007
+  type: NodePort

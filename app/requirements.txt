@@ -1,0 +1,11 @@
+flask
+gunicorn
+requests
+googletrans==4.0.0rc1
+boto3
+botocore
+python-dotenv
+
+
+
+
